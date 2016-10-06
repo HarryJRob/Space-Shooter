@@ -12,10 +12,13 @@ namespace GameForm
     public partial class GameForm : Form
     {
         private GEngine GraphicsEngine;
-        
+        private PlayerShip Player1;
+        private PlayerShip Player2;
+                
         public GameForm()
         {
             InitializeComponent();
+            GameTick.Enabled = true;
         }
 
         private void GameForm_Load(object sender, EventArgs e)
@@ -30,7 +33,7 @@ namespace GameForm
             {
                 Application.Exit();
             }
-            else 
+            else
             {
                 //Pass to PlayerShip
             }
@@ -38,15 +41,14 @@ namespace GameForm
 
         private void gameFrm_keyUp(object sender, KeyEventArgs e) 
         {
-
+            //Pass to PlayerShip
         }
 
-        private void canvasPaint(object sender, PaintEventArgs e)
+        private void GameForm_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(Pens.Green, 10, 10, 200, 150);
-            GraphicsEngine = new GEngine();
+            Graphics g = this.CreateGraphics();
+            GraphicsEngine = new GEngine(g);
         }
-        
 
         private void GameTick_Tick(object sender, EventArgs e)
         {
@@ -57,6 +59,7 @@ namespace GameForm
              * Draw current frame
              */
         }
+
 
 
     }

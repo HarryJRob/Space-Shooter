@@ -44,6 +44,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "GameForm";
             this.Load += new System.EventHandler(this.GameForm_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameForm_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gameFrm_keyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gameFrm_keyUp);
             this.ResumeLayout(false);
