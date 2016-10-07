@@ -14,17 +14,34 @@ namespace GameForm
         private GEngine GraphicsEngine;
         private PlayerShip Player1;
         private PlayerShip Player2;
+        private bool twoPlayer;
                 
         public GameForm()
         {
             InitializeComponent();
-            GameTick.Enabled = true;
         }
 
         private void GameForm_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+
+            twoPlayer = false; //Will be passed from menu form as it closes
+
+            if (twoPlayer)
+            {
+                Player1 = new PlayerShip();
+                Player2 = new PlayerShip();
+                Player1.LoadPlayerShip(1);
+                Player2.LoadPlayerShip(2);
+            }
+            else
+            {
+                Player1 = new PlayerShip();
+                Player1.LoadPlayerShip(3);
+                Player2 = null;
+            }
+            GameTick.Enabled = true;
         }
 
         private void gameFrm_keyDown(object sender, KeyEventArgs e)
@@ -35,13 +52,29 @@ namespace GameForm
             }
             else
             {
-                //Pass to PlayerShip
+                if (twoPlayer)
+                {
+                    Player1.keyDown(e, 1);
+                    Player2.keyDown(e, 2);
+                }
+                else
+                {
+                    Player1.keyDown(e, 3);
+                }
             }
         }
 
         private void gameFrm_keyUp(object sender, KeyEventArgs e) 
         {
-            //Pass to PlayerShip
+            if (twoPlayer)
+            {
+                Player1.keyUp(e, 1);
+                Player2.keyUp(e, 2);
+            }
+            else
+            {
+                Player1.keyUp(e, 3);
+            }
         }
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
@@ -60,7 +93,9 @@ namespace GameForm
              */
         }
 
-
-
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            GraphicsEngine.stopRender();
+        }
     }
 }

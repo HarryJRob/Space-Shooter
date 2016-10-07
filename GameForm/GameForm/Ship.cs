@@ -11,13 +11,13 @@ namespace GameForm
     {
         protected int health;
         protected Point shipLocation;
-        protected List<Point> BulletLocation = new List<Point> { };
+        protected List<Bullet> BulletLocation = new List<Bullet> { };
         protected string bulletImageName;
         protected int movementAngle;
         protected int velocity;
         protected int defaultVelocity;
 
-        protected virtual void fireBullet()
+        public virtual void fireBullet()
         {
 
         }

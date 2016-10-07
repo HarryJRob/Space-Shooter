@@ -11,12 +11,12 @@ namespace GameForm
     {
         private Graphics drawHandle;
         private Thread renderThread;
-        private Bitmap DBFrame1 = new Bitmap(Image.FromFile(@"N:\test.png"));
-        private Bitmap DBFrame2 = new Bitmap(Image.FromFile(@"N:\test.png"));
-        private bool currentFrame;
+        private bool currentFrame = true;
 
         public GEngine(Graphics g)
         {
+            //Load an array of required assets and then ID them to draw a frame
+            //Maybe custom class for frame which handles what needs to be drawn per frame
             drawHandle = g;
             renderThread = new Thread(new ThreadStart(render));
             renderThread.Start();
@@ -24,15 +24,15 @@ namespace GameForm
 
         public void render()
         {
-                if (currentFrame)
-                {
-                    drawHandle.DrawLine(Pens.Blue, new Point(0, 0), new Point(50, 50));
-                }
-                else
-                {
-                    drawHandle.DrawImage(DBFrame2, new Point(50, 50));
-                }
+            while (true)
+            {
                 currentFrame = !currentFrame;
+            }
+        }
+
+        public void RenderFrame()
+        {
+
         }
 
         public void stopRender()
