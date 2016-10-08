@@ -19,7 +19,7 @@ namespace GameForm
 
         public virtual void fireBullet()
         {
-
+            
         }
     }
 }

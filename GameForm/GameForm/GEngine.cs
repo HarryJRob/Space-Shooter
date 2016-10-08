@@ -11,7 +11,7 @@ namespace GameForm
     {
         private Graphics drawHandle;
         private Thread renderThread;
-        private bool currentFrame = true;
+        private Size gameWindowSize;
 
         public GEngine(Graphics g)
         {
@@ -22,22 +22,40 @@ namespace GameForm
             renderThread.Start();
         }
 
-        public void render()
+        private void render()
         {
+            int framesRendered = 0;
+            long startTime = Environment.TickCount;
+            Bitmap frame = new Bitmap(gameWindowSize.Width, gameWindowSize.Height);
+            Graphics frameGraphics = Graphics.FromImage(frame);
+            int x = 0, y = 0;
             while (true)
             {
-                currentFrame = !currentFrame;
+                x += 5;
+                y += 5;
+                frameGraphics.FillRectangle(new SolidBrush(Color.Red), 0, 0, (gameWindowSize.Width/20 + x), (gameWindowSize.Height/20) + y);
+                //Keep updating frame bitmap using frame graphics
+                drawHandle.DrawImage(frame, 0, 0);
+
+                //Benchmarking
+                framesRendered++;
+                if ((Environment.TickCount) >= startTime + 1000)
+                {
+                    Console.WriteLine("GEngine ----- FPS Counter: " + framesRendered);
+                    framesRendered = 0;
+                    startTime = Environment.TickCount;
+                }
             }
-        }
-
-        public void RenderFrame()
-        {
-
         }
 
         public void stopRender()
         {
             renderThread.Abort();
+        }
+
+        public Size SetgameWindowSize
+        {
+            set {gameWindowSize = value;}
         }
     }
 }

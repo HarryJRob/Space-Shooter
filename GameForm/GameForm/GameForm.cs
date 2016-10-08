@@ -11,6 +11,7 @@ namespace GameForm
 {
     public partial class GameForm : Form
     {
+        public List<string> renderList = new List<string>;
         private GEngine GraphicsEngine;
         private PlayerShip Player1;
         private PlayerShip Player2;
@@ -23,11 +24,6 @@ namespace GameForm
 
         private void GameForm_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-
-            twoPlayer = false; //Will be passed from menu form as it closes
-
             if (twoPlayer)
             {
                 Player1 = new PlayerShip();
@@ -42,6 +38,10 @@ namespace GameForm
                 Player2 = null;
             }
             GameTick.Enabled = true;
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            twoPlayer = false; //Will be passed from menu form as it closes
         }
 
         private void gameFrm_keyDown(object sender, KeyEventArgs e)
@@ -81,6 +81,7 @@ namespace GameForm
         {
             Graphics g = this.CreateGraphics();
             GraphicsEngine = new GEngine(g);
+            GraphicsEngine.SetgameWindowSize = this.ClientSize;
         }
 
         private void GameTick_Tick(object sender, EventArgs e)
