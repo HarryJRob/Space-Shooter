@@ -11,18 +11,20 @@ namespace GameForm
     {
         private bool moveUp, moveLeft, moveRight, moveDown, shoot, boost;
         private int defaultBoostVelocity;
+        private byte playerValue;
 
         public void LoadPlayerShip(byte playerNum) 
         {
-            if (playerNum == 1)
+            playerValue = playerNum;
+            if (playerValue == 1)
             {
 
             }
-            else if (playerNum == 2)
+            else if (playerValue == 2)
             {
 
             }
-            else if (playerNum == 3)
+            else if (playerValue == 3)
             {
 
             }
@@ -33,9 +35,9 @@ namespace GameForm
             //Add bullet to bullet list
         }
 
-        public void keyUp(KeyEventArgs e, byte controlsAllowed)
+        public void keyUp(KeyEventArgs e)
         {
-            if (controlsAllowed == 1)
+            if (playerValue == 1)
             {
                 if (e.KeyCode == Keys.W)
                 {
@@ -65,7 +67,7 @@ namespace GameForm
                     shoot = true;
                 }
             }
-            else if (controlsAllowed == 2)
+            else if (playerValue == 2)
             {
                 if (e.KeyCode == Keys.Up)
                 {
@@ -95,7 +97,7 @@ namespace GameForm
                     shoot = true;
                 }
             }
-            else if (controlsAllowed == 3)
+            else if (playerValue == 3)
             {
                 if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
                 {
@@ -127,9 +129,9 @@ namespace GameForm
             }
         }
 
-        public void keyDown(KeyEventArgs e, byte controlsAllowed)
+        public void keyDown(KeyEventArgs e)
         {
-            if (controlsAllowed == 1)
+            if (playerValue == 1)
             {
                 if (e.KeyCode == Keys.W)
                 {
@@ -159,7 +161,7 @@ namespace GameForm
                     shoot = false;
                 }
             }
-            else if (controlsAllowed == 2)
+            else if (playerValue == 2)
             {
                 if (e.KeyCode == Keys.Up)
                 {
@@ -189,7 +191,7 @@ namespace GameForm
                     shoot = false;
                 }
             }
-            else if (controlsAllowed == 3)
+            else if (playerValue == 3)
             {
                 if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
                 {

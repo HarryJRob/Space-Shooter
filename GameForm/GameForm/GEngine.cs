@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Threading;
 
@@ -20,6 +18,7 @@ namespace GameForm
             drawHandle = g;
             renderThread = new Thread(new ThreadStart(render));
             renderThread.Start();
+            
         }
 
         private void render()
