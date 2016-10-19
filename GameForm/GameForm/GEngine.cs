@@ -19,22 +19,22 @@ namespace GameForm
             renderThread = new Thread(new ThreadStart(render));
             renderThread.Start();
             
+            
         }
 
         private void render()
         {
             int framesRendered = 0;
             long startTime = Environment.TickCount;
-            Bitmap frame = new Bitmap(gameWindowSize.Width, gameWindowSize.Height);
-            Graphics frameGraphics = Graphics.FromImage(frame);
             int x = 0, y = 0;
             while (true)
             {
-                x += 5;
-                y += 5;
-                frameGraphics.FillRectangle(new SolidBrush(Color.Red), 0, 0, (gameWindowSize.Width/20 + x), (gameWindowSize.Height/20) + y);
+                x += 1;
+                y += 1;
                 //Keep updating frame bitmap using frame graphics
-                drawHandle.DrawImage(frame, 0, 0);
+                drawHandle.FillRectangle(new SolidBrush(Color.Red), 0, 0, (gameWindowSize.Width / 20 + x), (gameWindowSize.Height / 20) + y);
+                
+                
 
                 //Benchmarking
                 framesRendered++;

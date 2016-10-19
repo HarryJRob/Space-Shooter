@@ -24,7 +24,7 @@ namespace GameForm
             {
 
                 x += 1;
-                
+                framesRendered++;
                 if ((Environment.TickCount) >= startTime + 1000)
                 {
                     Console.WriteLine("CEngine ----- FPS Counter: " + framesRendered);

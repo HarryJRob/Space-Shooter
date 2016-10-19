@@ -10,10 +10,11 @@ namespace GameForm
     class Ship
     {
         protected int health;
+        protected Size shipSize;
         protected Point shipLocation;
         protected List<Bullet> BulletLocation = new List<Bullet> { };
         protected string bulletImageName;
-        protected int movementAngle;
+        //protected int movementAngle;
         protected int velocity;
         protected int defaultVelocity;
 
