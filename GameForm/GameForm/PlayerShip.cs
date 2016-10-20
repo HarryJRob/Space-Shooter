@@ -11,11 +11,9 @@ namespace GameForm
         private int defaultBoostVelocity = 10;
         private byte playerValue;
         private Image PlayerImage;
-        public void LoadPlayerShip(byte playerNum, Image X) 
+
+        public void LoadPlayerShip(byte playerNum)
         {
-            shipSize = new Size(100, 70);
-            X.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            PlayerImage = new Bitmap(X, shipSize);
             shipLocation = new Point(0, 0);
             defaultVelocity = 5;
             velocity = defaultVelocity;

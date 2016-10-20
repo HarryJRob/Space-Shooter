@@ -9,7 +9,15 @@ namespace GameForm
 {
     public partial class GameForm : Form
     {
-        public Image PlayerImage;
+
+        private struct LogicList
+        {
+            private Point Location;
+            private Size Hitbox;
+            private int ImageLoc;
+        }
+
+        private List<LogicList> LList = new List<LogicList> { };
         private GEngine GraphicsEngine;
         private CEngine CollisionEngine;
         private PlayerShip Player1;
@@ -22,7 +30,6 @@ namespace GameForm
 
         private void GameForm_Load(object sender, EventArgs e)
         {
-            PlayerImage = new Bitmap(Image.FromFile(@"C:\Users\Harry Robertson\Source\Repos\Space-Shooter\GameForm\GameForm\Resources\working.jpg"));
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bool twoPlayer = false;
@@ -30,22 +37,22 @@ namespace GameForm
             {
                 Player1 = new PlayerShip();
                 Player2 = new PlayerShip();
-                Player1.LoadPlayerShip(1, PlayerImage);
-                Player2.LoadPlayerShip(2, PlayerImage);
+                Player1.LoadPlayerShip(1);
+                Player2.LoadPlayerShip(2);
             }
             else
             {
                 Player1 = new PlayerShip();
-                Player1.LoadPlayerShip(3, PlayerImage);
+                Player1.LoadPlayerShip(3);
                 Player2 = null;
             }
             GameTick.Enabled = true;
 
             Graphics g = this.CreateGraphics();
-            //GraphicsEngine = new GEngine(g);
-            //GraphicsEngine.SetgameWindowSize = this.ClientSize;
-            //CollisionEngine = new CEngine();
-            //CollisionEngine.SetgameWindowSize = this.ClientSize;
+            GraphicsEngine = new GEngine(g);
+            GraphicsEngine.SetgameWindowSize = this.ClientSize;
+            CollisionEngine = new CEngine();
+            CollisionEngine.SetgameWindowSize = this.ClientSize;
         }
 
         private void gameFrm_keyDown(object sender, KeyEventArgs e)
@@ -80,24 +87,24 @@ namespace GameForm
                 Player1.keyUp(e);
             }
         }
-
-        private void GameForm_Paint(object sender, PaintEventArgs e)
-        {
-            //Updates on form redraw therefore making multiple engines
-        }
-
+        
         private void GameTick_Tick(object sender, EventArgs e)
         {
-            Player1.ActionCheck();
-            Graphics g = this.CreateGraphics();
-            Player1.Draw(g);
-            g.Dispose();
+            
         }
 
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //GraphicsEngine.stopRender();
-            //CollisionEngine.stopCollision();
+            GraphicsEngine.stopRender();
+            CollisionEngine.stopCollision();
+        }
+
+        public List<LogicList> GetList
+        {
+            get
+            {
+                return LList;
+            }
         }
     }
 }
