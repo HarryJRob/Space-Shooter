@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 
-namespace GameForm
+namespace Game
 {
     class GEngine
     {
@@ -16,25 +16,19 @@ namespace GameForm
             //Load an array of required assets and then ID them to draw a frame
             //Maybe custom class for frame which handles what needs to be drawn per frame
             drawHandle = g;
+            LoadAsset();
             renderThread = new Thread(new ThreadStart(render));
             renderThread.Start();
-            
-            
         }
 
         private void render()
         {
             int framesRendered = 0;
             long startTime = Environment.TickCount;
-            int x = 0, y = 0;
             while (true)
             {
-                x += 1;
-                y += 1;
                 //Keep updating frame bitmap using frame graphics
-                drawHandle.FillRectangle(new SolidBrush(Color.Red), 0, 0, (gameWindowSize.Width / 20 + x), (gameWindowSize.Height / 20) + y);
-                
-                
+                drawHandle.FillRectangle(new SolidBrush(Color.Aqua), 0, 0, gameWindowSize.Width, gameWindowSize.Height);
 
                 //Benchmarking
                 framesRendered++;
@@ -52,9 +46,14 @@ namespace GameForm
             renderThread.Abort();
         }
 
-        public Size SetgameWindowSize
+        public void LoadAsset()
         {
-            set {gameWindowSize = value;}
+
+        }
+
+        public Size setWindowSize
+        {
+            set { gameWindowSize = value; }
         }
     }
 }

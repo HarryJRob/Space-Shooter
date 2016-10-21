@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace GameForm
+namespace Game
 {
-    class PlayerShip : Ship
+    public class PlayerShip : Ship
     {
         private bool moveUp, moveLeft, moveRight, moveDown, shoot, boost;
         private int defaultBoostVelocity = 10;
         private byte playerValue;
-        private Image PlayerImage;
 
         public void LoadPlayerShip(byte playerNum)
         {
             shipLocation = new Point(0, 0);
             defaultVelocity = 5;
             velocity = defaultVelocity;
+            shipSize = new Size(200, 200);
+            shipImage = 0;
+
             playerValue = playerNum;
             if (playerValue == 1)
             {
@@ -239,9 +241,10 @@ namespace GameForm
             if (moveRight) { shipLocation.X += velocity; }
         }
 
-        public void Draw(Graphics drawHandle)
-        {
-            drawHandle.DrawImage(PlayerImage, shipLocation);
-        }
+        public Size getPlayerSize { get { return shipSize; } }
+
+        public Point getPlayerLocation { get { return shipLocation; } }
+
+        public int getPlayerImage { get { return shipImage; } }
     }
 }

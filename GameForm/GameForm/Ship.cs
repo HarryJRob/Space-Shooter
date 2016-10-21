@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace GameForm
+namespace Game
 {
-    class Ship
+    public class Ship
     {
         protected int health;
         protected Size shipSize;
         protected Point shipLocation;
-        protected List<Bullet> BulletLocation = new List<Bullet> { };
-        protected string bulletImageName;
+        protected byte shipImage;
+        protected byte bulletImageName;
         //protected int movementAngle;
         protected int velocity;
         protected int defaultVelocity;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 
-namespace GameForm
+namespace Game
 {
     class CEngine
     {

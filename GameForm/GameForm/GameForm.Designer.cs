@@ -1,4 +1,4 @@
-﻿namespace GameForm
+﻿namespace Game
 {
     partial class GameForm
     {

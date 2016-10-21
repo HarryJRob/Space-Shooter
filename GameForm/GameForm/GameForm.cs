@@ -5,24 +5,16 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GameForm
+namespace Game
 {
     public partial class GameForm : Form
     {
 
-        private struct LogicList
-        {
-            private Point Location;
-            private Size Hitbox;
-            private int ImageLoc;
-        }
-
-        private List<LogicList> LList = new List<LogicList> { };
         private GEngine GraphicsEngine;
         private CEngine CollisionEngine;
-        private PlayerShip Player1;
-        private PlayerShip Player2;
-                
+        public PlayerShip Player1;
+        public PlayerShip Player2;
+
         public GameForm()
         {
             InitializeComponent();
@@ -50,7 +42,7 @@ namespace GameForm
 
             Graphics g = this.CreateGraphics();
             GraphicsEngine = new GEngine(g);
-            GraphicsEngine.SetgameWindowSize = this.ClientSize;
+            GraphicsEngine.setWindowSize = this.ClientSize;
             CollisionEngine = new CEngine();
             CollisionEngine.SetgameWindowSize = this.ClientSize;
         }
@@ -90,6 +82,7 @@ namespace GameForm
         
         private void GameTick_Tick(object sender, EventArgs e)
         {
+            Player1.ActionCheck();
             
         }
 
@@ -98,13 +91,6 @@ namespace GameForm
             GraphicsEngine.stopRender();
             CollisionEngine.stopCollision();
         }
-
-        public List<LogicList> GetList
-        {
-            get
-            {
-                return LList;
-            }
-        }
+        
     }
 }
