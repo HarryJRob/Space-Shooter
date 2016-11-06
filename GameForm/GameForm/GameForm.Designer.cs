@@ -31,12 +31,24 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             this.GameTick = new System.Windows.Forms.Timer(this.components);
+            this.Render = new System.Windows.Forms.Timer(this.components);
+            this.Collision = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // GameTick
             // 
             this.GameTick.Interval = 1;
             this.GameTick.Tick += new System.EventHandler(this.GameTick_Tick);
+            // 
+            // Render
+            // 
+            this.Render.Interval = 1;
+            this.Render.Tick += new System.EventHandler(this.Render_Tick);
+            // 
+            // Collision
+            // 
+            this.Collision.Interval = 1;
+            this.Collision.Tick += new System.EventHandler(this.Collision_Tick);
             // 
             // GameForm
             // 
@@ -55,6 +67,8 @@
         #endregion
 
         private System.Windows.Forms.Timer GameTick;
+        private System.Windows.Forms.Timer Render;
+        private System.Windows.Forms.Timer Collision;
     }
 }
 

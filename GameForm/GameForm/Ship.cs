@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace Game
@@ -12,15 +8,20 @@ namespace Game
         protected int health;
         protected Size shipSize;
         protected Point shipLocation;
-        protected byte shipImage;
-        protected byte bulletImageName;
+        protected Image shipImage;
+        protected List<Bullet> BulletList = new List<Bullet> { };
         //protected int movementAngle;
         protected int velocity;
         protected int defaultVelocity;
 
-        public virtual void fireBullet()
+        public virtual void FireBullet()
         {
             
+        }
+
+        public void DrawSelf(Graphics drawHandle)
+        {
+            drawHandle.DrawImage(shipImage,shipLocation.X,shipLocation.Y,shipSize.Width,shipSize.Height);
         }
     }
 }

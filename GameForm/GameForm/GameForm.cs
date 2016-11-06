@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Game
@@ -10,11 +7,9 @@ namespace Game
     public partial class GameForm : Form
     {
 
-        private GEngine GraphicsEngine;
-        private CEngine CollisionEngine;
-        public PlayerShip Player1;
-        public PlayerShip Player2;
-
+        private PlayerShip Player1;
+        private PlayerShip Player2;
+        private Graphics DrawHandle;
         public GameForm()
         {
             InitializeComponent();
@@ -25,6 +20,7 @@ namespace Game
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bool twoPlayer = false;
+            DrawHandle = this.CreateGraphics();
             if (twoPlayer)
             {
                 Player1 = new PlayerShip();
@@ -39,12 +35,8 @@ namespace Game
                 Player2 = null;
             }
             GameTick.Enabled = true;
-
-            Graphics g = this.CreateGraphics();
-            GraphicsEngine = new GEngine(g);
-            GraphicsEngine.setWindowSize = this.ClientSize;
-            CollisionEngine = new CEngine();
-            CollisionEngine.SetgameWindowSize = this.ClientSize;
+            Render.Enabled = true;
+            Collision.Enabled = true;
         }
 
         private void gameFrm_keyDown(object sender, KeyEventArgs e)
@@ -57,12 +49,12 @@ namespace Game
             {
                 if (Player2 != null)
                 {
-                    Player1.keyDown(e);
-                    Player2.keyDown(e);
+                    Player1.KeyDown(e);
+                    Player2.KeyDown(e);
                 }
                 else
                 {
-                    Player1.keyDown(e);
+                    Player1.KeyDown(e);
                 }
             }
         }
@@ -71,25 +63,41 @@ namespace Game
         {
             if (Player2 != null)
             {
-                Player1.keyUp(e);
-                Player2.keyUp(e);
+                Player1.KeyUp(e);
+                Player2.KeyUp(e);
             }
             else
             {
-                Player1.keyUp(e);
+                Player1.KeyUp(e);
             }
         }
         
         private void GameTick_Tick(object sender, EventArgs e)
         {
             Player1.ActionCheck();
-            
         }
 
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GraphicsEngine.stopRender();
-            CollisionEngine.stopCollision();
+
+        }
+
+        private void Collision_Tick(object sender, EventArgs e)
+        {
+            GameTick.Enabled = false;
+            Render.Enabled = false;
+            Collision.Enabled = false;
+        }
+
+        private void Render_Tick(object sender, EventArgs e)
+        {
+            Player1.DrawSelf(DrawHandle);
+            Player1.DrawBullets(DrawHandle);
+            if (Player2 != null)
+            {
+                Player2.DrawSelf(DrawHandle);
+                Player2.DrawBullets(DrawHandle);
+            }
         }
         
     }

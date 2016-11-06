@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Drawing;
 
 namespace Game
@@ -8,7 +6,8 @@ namespace Game
     public class PlayerShip : Ship
     {
         private bool moveUp, moveLeft, moveRight, moveDown, shoot, boost;
-        private int defaultBoostVelocity = 10;
+        private bool collisionUp, collisionDown, collisionLeft, collisionRight;
+        private const int defaultBoostVelocity = 10;
         private byte playerValue;
 
         public void LoadPlayerShip(byte playerNum)
@@ -17,7 +16,6 @@ namespace Game
             defaultVelocity = 5;
             velocity = defaultVelocity;
             shipSize = new Size(200, 200);
-            shipImage = 0;
 
             playerValue = playerNum;
             if (playerValue == 1)
@@ -34,12 +32,12 @@ namespace Game
             }
         }
 
-        public override void fireBullet()
+        public override void FireBullet()
         {
             //Add bullet to bullet list
         }
 
-        public void keyUp(KeyEventArgs e)
+        public void KeyUp(KeyEventArgs e)
         {
             if (playerValue == 1)
             {
@@ -133,7 +131,7 @@ namespace Game
             }
         }
 
-        public void keyDown(KeyEventArgs e)
+        public void KeyDown(KeyEventArgs e)
         {
             if (playerValue == 1)
             {
@@ -229,7 +227,6 @@ namespace Game
 
         public void ActionCheck()
         {
-            //May thread this to make it more efficient 
             if (boost)
             {
                 if (velocity < defaultBoostVelocity) { velocity += 1; }
@@ -241,10 +238,18 @@ namespace Game
             if (moveRight) { shipLocation.X += velocity; }
         }
 
-        public Size getPlayerSize { get { return shipSize; } }
+        public void DrawBullets(Graphics drawHandle)
+        {
+            foreach (Bullet B in BulletList)
+            {
 
-        public Point getPlayerLocation { get { return shipLocation; } }
+            }
+        }
 
-        public int getPlayerImage { get { return shipImage; } }
+        //public Size GetPlayerSize { get { return shipSize; } }
+
+        //public Point GetPlayerLocation { get { return shipLocation; } }
+
+        //public Image GetPlayerImage { get { return shipImage; } set { shipImage = value; } }
     }
 }
