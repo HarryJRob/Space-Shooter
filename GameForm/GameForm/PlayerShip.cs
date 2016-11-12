@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
+using System.Threading;
 
 namespace Game
 {
@@ -18,22 +19,11 @@ namespace Game
             shipSize = new Size(200, 200);
 
             playerValue = playerNum;
-            if (playerValue == 1)
-            {
-
-            }
-            else if (playerValue == 2)
-            {
-
-            }
-            else if (playerValue == 3)
-            {
-
-            }
         }
 
         public override void FireBullet()
         {
+            BulletList.Add(new Bullet());
             //Add bullet to bullet list
         }
 
@@ -225,31 +215,32 @@ namespace Game
             }
         }
 
-        public void ActionCheck()
+        public override void ActionCheck()
         {
             if (boost)
             {
                 if (velocity < defaultBoostVelocity) { velocity += 1; }
             }
             else if (velocity > defaultVelocity) { velocity -= 1; }
-            if (moveUp) { shipLocation.Y -= velocity; }
-            if (moveDown) { shipLocation.Y += velocity; }
-            if (moveLeft) { shipLocation.X -= velocity; }
-            if (moveRight) { shipLocation.X += velocity; }
+            if (moveUp && collisionUp == false) { shipLocation.Y -= velocity; }
+            if (moveDown && collisionDown == false) { shipLocation.Y += velocity; }
+            if (moveLeft && collisionLeft == false) { shipLocation.X -= velocity; }
+            if (moveRight && collisionRight == false) { shipLocation.X += velocity; }
+            if (shoot) { FireBullet(); shoot = false; }
         }
 
         public void DrawBullets(Graphics drawHandle)
         {
-            foreach (Bullet B in BulletList)
-            {
-
-            }
+            Thread thread = new Thread(new ThreadStart(Test(drawHandle)));
+            thread.Start();
         }
 
-        //public Size GetPlayerSize { get { return shipSize; } }
-
-        //public Point GetPlayerLocation { get { return shipLocation; } }
-
-        //public Image GetPlayerImage { get { return shipImage; } set { shipImage = value; } }
+        private void Test(Graphics drawhandle)
+        {
+            foreach (Bullet B in BulletList)
+            {
+                drawHandle.DrawImage(bulletImage, B.BulletLocation.X, B.BulletLocation.Y, B.BulletSize.Width, B.BulletSize.Width);
+            }
+        }
     }
 }

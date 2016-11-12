@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using System.Threading;
 namespace Game
 {
     public partial class GameForm : Form
@@ -79,20 +79,19 @@ namespace Game
 
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-        }
-
-        private void Collision_Tick(object sender, EventArgs e)
-        {
             GameTick.Enabled = false;
             Render.Enabled = false;
             Collision.Enabled = false;
         }
 
+        private void Collision_Tick(object sender, EventArgs e)
+        {
+
+        }
+
         private void Render_Tick(object sender, EventArgs e)
         {
             Player1.DrawSelf(DrawHandle);
-            Player1.DrawBullets(DrawHandle);
             if (Player2 != null)
             {
                 Player2.DrawSelf(DrawHandle);

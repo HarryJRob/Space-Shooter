@@ -6,9 +6,10 @@ namespace Game
     public class Ship
     {
         protected int health;
-        protected Size shipSize;
-        protected Point shipLocation;
-        protected Image shipImage;
+        protected Size shipSize = new Size (200,200);
+        protected Point shipLocation = new Point(0,0);
+        protected Image shipImage = Game.Properties.Resources.working;
+        protected Image bulletImage = Game.Properties.Resources.Bullet;
         protected List<Bullet> BulletList = new List<Bullet> { };
         //protected int movementAngle;
         protected int velocity;
@@ -17,6 +18,11 @@ namespace Game
         public virtual void FireBullet()
         {
             
+        }
+
+        public virtual void ActionCheck()
+        {
+
         }
 
         public void DrawSelf(Graphics drawHandle)
