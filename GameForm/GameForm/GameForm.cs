@@ -92,6 +92,7 @@ namespace Game
         private void Render_Tick(object sender, EventArgs e)
         {
             Player1.DrawSelf(DrawHandle);
+            Player1.DrawBullets(DrawHandle);
             if (Player2 != null)
             {
                 Player2.DrawSelf(DrawHandle);
