@@ -232,31 +232,27 @@ namespace Game
         public void DrawBullets(Graphics drawHandle)
         {
 
-            //Thread myThread = new Thread(new ParameterizedThreadStart(Test));
-            foreach (Bullet B in BulletList)
-            {
-                drawHandle.DrawImage(bulletImage, B.BulletLocation.X, B.BulletLocation.Y, B.BulletSize.Width, B.BulletSize.Height);
-            }
-            //myThread.Start(drawHandle);
+            Thread myThread = new Thread(new ParameterizedThreadStart(Test));
+            //foreach (Bullet B in BulletList)
+            //{
+            //    drawHandle.DrawImage(bulletImage, B.BulletLocation.X, B.BulletLocation.Y, B.BulletSize.Width, B.BulletSize.Height);
+            //}
+            myThread.Start(drawHandle);
                 
         }
 
         private void Test(object drawhandle)
         {
             Graphics g = (Graphics)drawhandle;
-            foreach (Bullet B in BulletList)
-            {
-                try
-                {
-
-
-                    g.DrawImage(bulletImage, B.BulletLocation.X, B.BulletLocation.Y, B.BulletSize.Width, B.BulletSize.Height);
+                try {
+                    foreach (Bullet B in BulletList)
+                    {
+                        g.DrawImage(bulletImage, B.BulletLocation.X, B.BulletLocation.Y, B.BulletSize.Width, B.BulletSize.Height);
+                    }
                 }
-                catch
-                {
-                    MessageBox.Show("1");
-                }
+                catch { }
+
             }
         }
     }
-}
+

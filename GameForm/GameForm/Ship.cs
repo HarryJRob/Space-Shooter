@@ -27,7 +27,11 @@ namespace Game
 
         public void DrawSelf(Graphics drawHandle)
         {
-            drawHandle.DrawImage(shipImage,shipLocation.X,shipLocation.Y,shipSize.Width,shipSize.Height);
+            try
+            {
+                drawHandle.DrawImage(shipImage, shipLocation.X, shipLocation.Y, shipSize.Width, shipSize.Height);
+            }
+            catch { }
         }
     }
 }

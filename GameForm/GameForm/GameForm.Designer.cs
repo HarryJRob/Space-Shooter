@@ -42,7 +42,7 @@
             // 
             // Render
             // 
-            this.Render.Interval = 30;
+            this.Render.Interval = 1;
             this.Render.Tick += new System.EventHandler(this.Render_Tick);
             // 
             // Collision
